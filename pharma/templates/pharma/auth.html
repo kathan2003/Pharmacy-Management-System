@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap.min.css' %}">
+    <script src="{% static 'pharma/js/jquery.js' %}"></script>
+    <script src="{% static 'pharma/js/bootstrap.min.js' %}"></script>
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .tab-button {
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a id="login-tab" class="nav-link {% if active_tab == 'login' %}active{% endif %}" href="#login" data-toggle="tab">Login</a>
+        </li>
+        <li class="nav-item">
+            <a id="register-tab" class="nav-link {% if active_tab == 'register' %}active{% endif %}" href="#register" data-toggle="tab">Register</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" style="padding-top: 20px;">
+        <div class="tab-pane fade {% if active_tab == 'login' %}show active{% endif %}" id="login">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input id="login-username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input id="login-password" name="password" type="password" class="form-control" required>
+                </div>
+                {% if login_error %}
+                    <div class="error">{{ login_error }}</div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+
+        <div class="tab-pane fade {% if active_tab == 'register' %}show active{% endif %}" id="register">
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input id="register-username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input id="register-email" name="email" type="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password1">Password</label>
+                    <input id="register-password1" name="password1" type="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password2">Confirm Password</label>
+                    <input id="register-password2" name="password2" type="password" class="form-control" required>
+                </div>
+                {% if register_error %}
+                    <div class="error">{{ register_error }}</div>
+                {% endif %}
+                <button type="submit" class="btn btn-success">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Activate Bootstrap tab on click
+    $(function () {
+        $('.nav-link').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,41 +1,50 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='index'),
+    path('', views.home, name='home'),
 
-    url(r'^dealerform/', views.dealerform, name="dealerform"),
-    url(r'^dealerforminsert/', views.dealerforminsert, name="dealerforminsert"),
-    url(r'^dealerformupdate(?P<foo>[0-9]+)/', views.dealerformupdate, name="dealerformupdate"),
-    url(r'^dealerformview(?P<foo>[0-9]+)/', views.dealerformview, name="dealerformview"),
-    url(r'^dealerformdelete(?P<foo>[0-9]+)/', views.dealerformdelete, name="dealerformdelete"),
-    url(r'^dealertable/', views.dealertable, name='dealertable'),
+    # Auth URLs
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
 
-    url(r'^medform/', views.medform, name="medform"),
-    url(r'^medforminsert/', views.medforminsert, name="medforminsert"),
-    url(r'^medformupdate(?P<foo>[0-9]+)/', views.medformupdate, name="medformupdate"),
-    url(r'^medformview(?P<foo>[0-9]+)/', views.medformview, name="medformview"),
-    url(r'^medformdelete(?P<foo>[0-9]+)/', views.medformdelete, name="medformdelete"),
-    url(r'^medtable/', views.medtable, name='medtable'),
+    # Dealer
+    path('dealerform/', views.dealerform, name="dealerform"),
+    path('dealerforminsert/', views.dealerforminsert, name="dealerforminsert"),
+    path('dealerformupdate<int:foo>/', views.dealerformupdate, name="dealerformupdate"),
+    path('dealerformview<int:foo>/', views.dealerformview, name="dealerformview"),
+    path('dealerformdelete<int:foo>/', views.dealerformdelete, name="dealerformdelete"),
+    path('dealertable/', views.dealertable, name='dealertable'),
 
-    url(r'^empform/', views.empform, name="empform"),
-    url(r'^empforminsert/', views.empforminsert, name="empforminsert"),
-    url(r'^empformupdate(?P<foo>[0-9]+)/', views.empformupdate, name="empformupdate"),
-    url(r'^empformview(?P<foo>[0-9]+)/', views.empformview, name="empformview"),
-    url(r'^empformdelete(?P<foo>[0-9]+)/', views.empformdelete, name="empformdelete"),
-    url(r'^emptable/', views.emptable, name='emptable'),
+    # Medicine
+    path('medform/', views.medform, name="medform"),
+    path('medforminsert/', views.medforminsert, name="medforminsert"),
+    path('medformupdate<int:foo>/', views.medformupdate, name="medformupdate"),
+    path('medformview<int:foo>/', views.medformview, name="medformview"),
+    path('medformdelete<int:foo>/', views.medformdelete, name="medformdelete"),
+    path('medtable/', views.medtable, name='medtable'),
 
-    url(r'^custform/', views.custform, name="custform"),
-    url(r'^custforminsert/', views.custforminsert, name="custforminsert"),
-    url(r'^custformupdate(?P<foo>[0-9]+)/', views.custformupdate, name="custformupdate"),
-    url(r'^custformview(?P<foo>[0-9]+)/', views.custformview, name="custformview"),
-    url(r'^custformdelete(?P<foo>[0-9]+)/', views.custformdelete, name="custformdelete"),
-    url(r'^custtable/', views.custtable, name='custtable'),
+    # Employee
+    path('empform/', views.empform, name="empform"),
+    path('empforminsert/', views.empforminsert, name="empforminsert"),
+    path('empformupdate<int:foo>/', views.empformupdate, name="empformupdate"),
+    path('empformview<int:foo>/', views.empformview, name="empformview"),
+    path('empformdelete<int:foo>/', views.empformdelete, name="empformdelete"),
+    path('emptable/', views.emptable, name='emptable'),
 
-    url(r'^purchaseform/', views.purchaseform, name="purchaseform"),
-    url(r'^purchaseforminsert/', views.purchaseforminsert, name="purchaseforminsert"),
-    url(r'^purchaseformupdate(?P<foo>[0-9]+)/', views.purchaseformupdate, name="purchaseformupdate"),
-    url(r'^purchaseformview(?P<foo>[0-9]+)/', views.purchaseformview, name="purchaseformview"),
-    url(r'^purchaseformdelete(?P<foo>[0-9]+)/', views.purchaseformdelete, name="purchaseformdelete"),
-    url(r'^purchasetable/', views.purchasetable, name='purchasetable')
+    # Customer
+    path('custform/', views.custform, name="custform"),
+    path('custforminsert/', views.custforminsert, name="custforminsert"),
+    path('custformupdate<int:foo>/', views.custformupdate, name="custformupdate"),
+    path('custformview<int:foo>/', views.custformview, name="custformview"),
+    path('custformdelete<int:foo>/', views.custformdelete, name="custformdelete"),
+    path('custtable/', views.custtable, name='custtable'),
+
+    # Purchase
+    path('purchaseform/', views.purchaseform, name="purchaseform"),
+    path('purchaseforminsert/', views.purchaseforminsert, name="purchaseforminsert"),
+    path('purchaseformupdate<int:foo>/', views.purchaseformupdate, name="purchaseformupdate"),
+    path('purchaseformview<int:foo>/', views.purchaseformview, name="purchaseformview"),
+    path('purchaseformdelete<int:foo>/', views.purchaseformdelete, name="purchaseformdelete"),
+    path('purchasetable/', views.purchasetable, name="purchasetable"),
 ]

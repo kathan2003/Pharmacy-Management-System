@@ -13,12 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.urls import path, include, register_converter
 from django.contrib import admin
 from pharma import views
+from pharma.converters import FormActionConverter
+
+# Register your custom converter
+register_converter(FormActionConverter, 'formid')
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^pharma/', include('pharma.urls')),
-    url(r'^$', views.home, name='index'),
+    path('admin/', admin.site.urls),
+    path('pharma/', include('pharma.urls')),  # your app urls with converter usage
+    path('', views.home, name='home'),  # your root home view
 ]
